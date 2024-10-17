@@ -1,0 +1,12 @@
+services:
+  aspnet-webnet:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8090:8080"
+    networks:
+      - webnet
+
+networks:
+  webnet:

@@ -1,0 +1,37 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <form method="post">
+    <h1 class="display-4">BFI12a - Ticketsystem</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table>
+    @foreach(Ticket t in Model.LstTickets)
+    {
+        <tr>
+            <td class="gross">@t.Beschreibung</td>
+            <td class="mittel">@t.Ersteller</td>
+            <td class="klein">@t.TicketStatus</td>
+            <td class="mittel">@t.ErstellDatum.ToShortDateString()</td>
+
+                <td> <button type="submit" asp-page-handler="BtnLoeschen" asp-route-id="@t.Id" class="btn btn-primary"> <img class="imagesd" src="~/images/Delete.png"> </button> </td>
+                <td> <button type="submit" asp-page-handler="BtnBearbeiten" asp-route-id="@t.Id" class="btn btn-primary"> <img class="imagesd" src="~/images/Settings.png">  </button> </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <hr />
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td colspan="6" >
+            <button type="submit" asp-page-handler="BtnNeu" class="btn btn-primary">Neues Ticket</button>
+        </td>
+    </tr>
+    </table>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+﻿@page "{id:int}"
+@model _03_Ticketsystem_ASP.NET_Core.Pages.BearbeitenModel
+@{
+}
+
+<link rel="stylesheet" href="~/css/bearbeiten.css" />
+<div class="edit-ticket-container">
+    <h1 class="title">Ticket bearbeiten</h1>
+    <div class="form-content">
+        <form method="post">
+            <label>Meldungstext</label>
+            @*WICHTIG: es wird nicht das komplette Ticket-Objekt übertragen
+              sondern nur die mit asp-for gebundenen Eigenschaften
+              -> Eine wichtige Eigenschaft (wie Id und Zeitstempel) müssen als hidden-Fleder übertragen werden.
+            *@
+
+            <!--<label for="meldungstext" class="label">Meldungstext</label>-->
+            <input type="hidden" asp-for="Ticket.Id" />
+            @* <input type="hidden" asp-for="Ticket.Zeitstempel" /> *@
+            <textarea id="meldungstext" class="textarea" rows="4" asp-for="Ticket.Beschreibung"></textarea>
+
+            <label for="status" class="label">Status</label>
+            <select asp-for="Ticket.TicketStatus" id="status" class="select">
+                <option>@Status.neu</option>
+                <option>@Status.bearbeitung</option>
+                <option>@Status.geloest</option>
+            </select>
+
+            @* <label for="ersteller" class="label">Ersteller</label>
+            <select id="ersteller" class="select">
+                <option>@Model.Ticket.Ersteller</option>
+            </select> *@
+
+            <label> Ersteller </label>
+                <select asp-for="Ticket.Ersteller">
+                    @foreach(Kunde kunde in Model.lstKunden)
+                    {
+                        <option>@kunde</option>
+                    }
+                </select>
+
+
+            <label for="erstellungsdatum" class="label">Erstellungsdatum</label>
+            <input type="text" id="erstellungsdatum" class="input" asp-for="ErstellDatum" readonly>
+
+            <div class="button-group">
+                <button type="submit" asp-page-handler="BtnSpeichern" class="btn btn-save">Speichern</button>
+                <button type="submit" asp-page-handler="BtnZurueck" class="btn btn-back">Zurück</button>
+            </div>
+        </form>
+    </div>
+</div>

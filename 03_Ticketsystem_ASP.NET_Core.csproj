@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>_03_Ticketsystem_ASP.NET_Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\images\**" />
+    <Content Remove="wwwroot\css\images\**" />
+    <EmbeddedResource Remove="wwwroot\css\images\**" />
+    <None Remove="wwwroot\css\images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\images\Settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\images\Delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="wwwroot\images\Settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <ApplicationDefinition Include="wwwroot\images\Settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>
