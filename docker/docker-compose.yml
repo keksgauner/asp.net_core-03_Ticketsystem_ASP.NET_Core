@@ -1,12 +1,7 @@
 services:
-  aspnet-webnet:
+  aspnet-webnet_ticket_system:
     build:
       context: ..
       dockerfile: ./docker/Dockerfile
     ports:
-      - "8090:8080"
-    networks:
-      - webnet
-
-networks:
-  webnet:
+      - "8091:8080"
