@@ -1,11 +1,11 @@
-﻿@page "{id:int}"
+﻿@page "{id:int?}"
 @model _03_Ticketsystem_ASP.NET_Core.Pages.BearbeitenModel
 @{
 }
 
 <link rel="stylesheet" href="~/css/bearbeiten.css" />
 <div class="edit-ticket-container">
-    <h1 class="title">Ticket bearbeiten</h1>
+    <h1 class="title">@Model.Title2</h1>
     <div class="form-content">
         <form method="post">
             <label>Meldungstext</label>
@@ -20,10 +20,15 @@
             <textarea id="meldungstext" class="textarea" rows="4" asp-for="Ticket.Beschreibung"></textarea>
 
             <label for="status" class="label">Status</label>
-            <select asp-for="Ticket.TicketStatus" id="status" class="select">
+            <select disabled="@Model.StatusDisabled" asp-for="Ticket.TicketStatus" id="status" class="select">
+                @foreach(Status s in Enum.GetValues(typeof(Status)))
+                {
+                    <option>@s</option>
+                }
+                @* 
                 <option>@Status.neu</option>
                 <option>@Status.bearbeitung</option>
-                <option>@Status.geloest</option>
+                <option>@Status.geloest</option> *@
             </select>
 
             @* <label for="ersteller" class="label">Ersteller</label>
@@ -32,16 +37,19 @@
             </select> *@
 
             <label> Ersteller </label>
-                <select asp-for="Ticket.Ersteller">
+            @{
+                var test = Model.Neu == false ? "disabled" : null;
+            }
+            <select disabled="@test" asp-for="ErstellerId">
                     @foreach(Kunde kunde in Model.lstKunden)
                     {
-                        <option>@kunde</option>
+                        <option value="@kunde.Id">@kunde</option> <!-- Hier wird der Eintrag ausgewählt, der zu der übergebenen KundenId passt (hier ErstellerId)-->
                     }
-                </select>
+            </select>
 
 
             <label for="erstellungsdatum" class="label">Erstellungsdatum</label>
-            <input type="text" id="erstellungsdatum" class="input" asp-for="ErstellDatum" readonly>
+            <input type="date" class="input" id="erstellungsdatum" asp-for="ErstellDatum" readonly>
 
             <div class="button-group">
                 <button type="submit" asp-page-handler="BtnSpeichern" class="btn btn-save">Speichern</button>

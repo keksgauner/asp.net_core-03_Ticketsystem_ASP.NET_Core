@@ -14,16 +14,21 @@
 
         public DateTime Zeitstempel { get; set; }
 
-        //public string Kurzbeschreibung
-        //{
-        //    get
-        //    {
-        //        if (Beschreibung.Length > 20)
-        //            return Beschreibung.Substring(0, 17) + "...";
-        //        else
-        //            return Beschreibung;
-        //    }
-        //}
+        public string Kurzbeschreibung
+        {
+            get
+            {
+                if (Beschreibung != null)
+                {
+                    if (Beschreibung.Length > 20)
+                        return Beschreibung.Substring(0, 17) + "...";
+                    else
+                        return Beschreibung;
+                }
+                else
+                    return "Keine Beschreibung gefunden";
+            }
+        }
 
 
         public Ticket(int id, string beschreibung, Status ticketStatus, DateTime erstellDatum, Kunde ersteller)

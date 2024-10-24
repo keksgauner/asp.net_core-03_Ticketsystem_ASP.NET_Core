@@ -6,32 +6,70 @@
 
 <div class="text-center">
     <form method="post">
-    <h1 class="display-4">BFI12a - Ticketsystem</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <table>
-    @foreach(Ticket t in Model.LstTickets)
-    {
-        <tr>
-            <td class="gross">@t.Beschreibung</td>
-            <td class="mittel">@t.Ersteller</td>
-            <td class="klein">@t.TicketStatus</td>
-            <td class="mittel">@t.ErstellDatum.ToShortDateString()</td>
+        <h1 class="display-4">BFI12a - Ticketsystem</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <table>
+            <tr>
+                <td colspan="4" style="text-align:right; width: 40*; padding-right: 10px;">
+                    <select id="sort" asp-for="Sort">
+                        <option value="Beschreibung">Beschreibung</option>
+                        <option value="Ersteller">Ersteller</option>
+                        <option value="Status">Status</option>
+                        <option value="Erstellungsdatum">Erstellungsdatum</option>
+                    </select>
+                </td>
 
-                <td> <button type="submit" asp-page-handler="BtnLoeschen" asp-route-id="@t.Id" class="btn btn-primary"> <img class="imagesd" src="~/images/Delete.png"> </button> </td>
-                <td> <button type="submit" asp-page-handler="BtnBearbeiten" asp-route-id="@t.Id" class="btn btn-primary"> <img class="imagesd" src="~/images/Settings.png">  </button> </td>
-        </tr>
+                <td style="text-align:center; width: 25*; padding-right: 10px;">
+                    <select id="sortOrder" asp-for="SortOrder">
+                        <option value="asc">Aufsteigend</option>
+                        <option value="desc">Absteigend</option>
+                    </select>
+                </td>
+
+                <td style="text-align: center; width: 35px; ">
+                    <button type="submit" asp-page-handler="BtnSort" class="btn btn-primary">Sortieren</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+
+        <table>
+
+            <tr class="ueberschrift">
+                <th class="gross">Beschreibung</th>
+                <th class="mittel">Ersteller</th>
+                <th class="klein">Status</th>
+                <th class="mittel">Erstellungsdatum</th>
+                <th class="klein" colspan="2">Aktionen</th>
+            </tr>
+            
+        @foreach(Ticket t in Model.LstTickets)
+        {
+            <tr>
+                <td class="gross" style="text-align: left;">@t.Beschreibung</td>
+                <td class="mittel" style="text-align: left;">@t.Ersteller</td>
+                <td class="klein">@t.TicketStatus</td>
+                <td class="mittel">@t.ErstellDatum.ToShortDateString()</td>
+
+                    <td> <button type="submit" asp-page-handler="BtnLoeschen" asp-route-id="@t.Id" class="btn btn-primary" style="margin-right: 5px;"> <img class="imagesd" src="~/images/Delete.png"> </button> </td>
+                    <td> <button type="submit" asp-page-handler="BtnBearbeiten" asp-route-id="@t.Id" class="btn btn-primary"> <img class="imagesd" src="~/images/Settings.png">  </button> </td>
+            </tr>
+            <tr>
+                <td colspan="6">
+                    <hr />
+                </td>
+            </tr>
+        }
+
         <tr>
-            <td colspan="6">
-                <hr />
+            <td colspan="6" >
+                <button type="submit" asp-page-handler="BtnNeu" class="btn btn-primary">Neues Ticket</button>
             </td>
         </tr>
-    }
-
-    <tr>
-        <td colspan="6" >
-            <button type="submit" asp-page-handler="BtnNeu" class="btn btn-primary">Neues Ticket</button>
-        </td>
-    </tr>
-    </table>
+        </table>
     </form>
 </div>

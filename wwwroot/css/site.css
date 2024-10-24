@@ -44,3 +44,10 @@ table{
 .gross{
     width: 300px;
 }
+
+.ueberschrift{
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 5px;
+    color: aqua;
+}
